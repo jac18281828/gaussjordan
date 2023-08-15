@@ -17,5 +17,5 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag ${GITHUB_REPOSITORY}:${GITHUB_SHA}
-        docker run --rm -i -t ${GITHUB_REPOSITORY}:${GITHUB_SHA}
+        docker run --rm -t ${GITHUB_REPOSITORY}:${GITHUB_SHA}
 
