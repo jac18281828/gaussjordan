@@ -26,6 +26,5 @@ func TestGaussJ1(t *testing.T) {
 	}
 	if !b.Equal(NewVecFrom(3, []float64{2, 3, -1})) {
 		t.Error("b != [2, 3, -1]")
-	}
-	
+	}	
 }

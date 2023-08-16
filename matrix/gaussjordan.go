@@ -117,6 +117,19 @@ func Get(a *matrix, i uint, j uint) float64 {
 	return (*a).data[i][j]
 }
 
+func GetMaxForCol(a *matrix, col uint) (max float64, maxIndex uint) {
+	n := Len(a)
+	max = Get(a, col, col)
+	maxIndex = col
+	for j := col + 1; j < n; j++ {
+		if max < Get(a, j, col) {
+			max = Get(a, j, col)
+			maxIndex = j
+		}
+	}
+	return max, maxIndex
+}
+
 // gauss jordan elimination method
 func GaussJ(a *matrix, b *matrix) (error) {
 	n := Len(a)
@@ -125,14 +138,7 @@ func GaussJ(a *matrix, b *matrix) (error) {
 	}
 	for i := uint(0); i < n; i++ {
 		// find max value
-		max := Get(a, i, i)
-		maxIndex := i
-		for j := i + 1; j < n; j++ {
-			if max < Get(a, j, i) {
-				max = Get(a, j, i)
-				maxIndex = j
-			}
-		}
+		max, maxIndex := GetMaxForCol(a, i)
 		// swap row
 		for j := uint(0); j < n; j++ {
 			tmp := Get(a, i, j)
